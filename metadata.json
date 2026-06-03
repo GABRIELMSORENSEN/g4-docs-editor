@@ -1,0 +1,6 @@
+{
+  "name": "G4 DOCS EDITOR",
+  "description": "Editor PDF local para texto, anotacoes, imagens, paginas e exportacao sem APIs externas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

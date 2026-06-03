@@ -1,0 +1,62 @@
+name: Build Release Apps
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run dist:win
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-apps
+          path: |
+            release-builds/*.exe
+            release-builds/*.blockmap
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y libfuse2 || sudo apt-get install -y libfuse2t64
+      - run: npm run dist:appimage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-appimage
+          path: release-builds/*.AppImage
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [windows, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG_NAME" release-assets/**/* \
+            --title "G4 DOCS EDITOR $TAG_NAME" \
+            --notes-file RELEASE_NOTES.md
