@@ -1,40 +1,34 @@
-# G4 DOCS EDITOR
+# G4 Docs Editor 1.1
 
-Editor PDF local em React/Vite. O app usa `pdf.js` para renderizar e localizar texto no documento e `pdf-lib` para exportar um novo PDF com edicoes aplicadas localmente.
+Editor PDF local para Windows, Linux e navegador. Identidade G4T0XX em preto e vermelho.
 
-## Funcoes
+## Usar
 
-- Abrir PDF local.
-- Identificar blocos de texto e editar por coordenada.
-- Inserir texto novo.
-- Cobrir/apagar texto ou area.
-- Marca-texto.
-- Caneta e assinatura.
-- Inserir imagens PNG/JPG.
-- Criar links.
-- Desenhar retangulo, circulo, linha e seta.
-- Adicionar pagina retrato ou paisagem.
-- Girar, duplicar, excluir e mover paginas.
-- Exportar PDF final sem API externa.
+Baixe o instalador ou a versão portátil em [Releases](https://github.com/GABRIELMSORENSEN/g4-docs-editor/releases). No navegador, use [G4 Docs Editor](https://gabrielmsorensen.github.io/g4-docs-editor/).
 
-## Desktop
+Abra um PDF, selecione a ferramenta e exporte uma cópia em **Salvar PDF**. Os documentos não são enviados a servidores.
 
-```bash
-npm run dist:desktop
-```
+## Recursos
 
-Gera instalador Windows e executavel portatil em `release-builds/`.
-O AppImage Linux e gerado no GitHub Actions pelo workflow de release.
+- Inserir e editar texto por sobreposição, imagens, links, assinatura e desenhos.
+- Reordenar, duplicar, girar, adicionar e remover páginas.
+- Histórico de desfazer/refazer para páginas e objetos.
+- Aviso antes de descartar alterações e mensagens de erro com recuperação.
+- Cancelamento de renderizações antigas durante mudanças rápidas de zoom/página.
 
-## Rodar
+**Cobrir é uma alteração visual.** O texto original permanece no arquivo e pode ser extraído. Para remoção de dados sigilosos, use uma ferramenta de redação segura. A edição de texto sobreposto usa fontes PDF padrão e não reconstrói a diagramação original.
 
-```bash
-npm install
-npm run dev
-```
+## Desenvolver e empacotar
 
-## Build
+Node.js 22 ou superior.
 
-```bash
+```powershell
+npm ci
+npm run lint
 npm run build
+npm run dist:win
 ```
+
+Linux: `npm run dist:appimage` em Linux. Os workflows existentes geram Windows/Linux em tags `v*`.
+
+Teste real do navegador: `python -m pip install playwright pypdf`, `python -m playwright install chromium` e `python tests/verify_browser.py`. O teste abre e exporta PDFs, confere o arquivo exportado e cobre histórico, erros, descarte e zoom. Evidências em `reports/`.

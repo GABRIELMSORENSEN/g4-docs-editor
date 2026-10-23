@@ -1,15 +1,9 @@
-# G4 DOCS EDITOR v1.0.0
+# G4 Docs Editor 1.1.0
 
-Primeira versao funcional do editor PDF local.
+- Identidade G4T0XX em preto e vermelho, ícones e interface responsiva.
+- Desfazer/refazer para páginas e objetos; proteção de alterações não salvas.
+- Cancelamento de renderizações antigas em trocas rápidas de zoom/página.
+- Erros na interface preservam o documento e as alterações.
+- Links externos do app desktop limitados a protocolos permitidos.
 
-Inclui:
-- Editor web local via GitHub Pages.
-- Aplicativo Windows instalavel.
-- Aplicativo Windows portatil.
-- Linux AppImage.
-- Icone G4 DOCS sem fundo branco externo.
-- Licenca proprietaria com todos os direitos reservados.
-
-Processamento local:
-- PDF.js para leitura/renderizacao e mapeamento de texto.
-- PDF-Lib para gerar PDF editado sem API externa.
+Verificado no navegador: abrir/exportar PDF real, ler o arquivo final (3 páginas), desfazer/refazer, exclusão com confirmação, arquivo inválido preservando o documento, descarte, zoom e tela estreita. Cobertura visual não remove o conteúdo original do PDF.

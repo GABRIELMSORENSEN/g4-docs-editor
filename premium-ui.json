@@ -1,0 +1,28 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": [
+    "src"
+  ],
+  "locale": "pt-BR",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": [
+    "Form",
+    "Scrollbar",
+    "Toast",
+    "CRUD"
+  ],
+  "ownership": {
+    "Select/Listbox": "native",
+    "Date": "native"
+  },
+  "requiredCommands": [
+    "runtime"
+  ],
+  "commands": {
+    "runtime": "python tests/verify_browser.py"
+  },
+  "evidence": {
+    "crudFullFlow": "tests/verify_browser.py",
+    "failurePaths": "tests/verify_browser.py"
+  }
+}

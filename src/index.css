@@ -19,3 +19,40 @@ textarea {
 * {
   box-sizing: border-box;
 }
+
+@theme {
+  --color-slate-50: #161316; --color-slate-100: #0d0b0d; --color-slate-200: #353035;
+  --color-slate-300: #51454b; --color-slate-400: #b49ba4; --color-slate-500: #baa8b0;
+  --color-slate-600: #d2c3c9; --color-slate-700: #e4d9dd; --color-slate-800: #f2e9ed; --color-slate-900: #fff7fa;
+  --color-blue-50: #31101b; --color-blue-100: #491427; --color-blue-200: #7b2941;
+  --color-blue-500: #ff4d6d; --color-blue-600: #be123c; --color-blue-700: #ff8097;
+  --color-emerald-600: #be123c; --color-emerald-700: #9f1239;
+}
+:root { color-scheme: dark; --surface: #161316; --accent: #be123c; --text: #fff7fa; --scroll-thumb: #75626b; --scroll-track: #0d0b0d; }
+body { margin: 0; background: var(--scroll-track); color: var(--text); }
+.editor-shell header,.editor-shell aside,.editor-shell .border-b.bg-white { background: var(--surface); }
+.editor-shell aside .bg-white { background: var(--surface); }
+.editor-shell > main > section { background: #282228; }
+.editor-shell section > div > .group.bg-white { background: var(--surface); }
+* { scrollbar-color: var(--scroll-thumb) var(--scroll-track); scrollbar-width: thin; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: var(--scroll-track); }
+*::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 8px; }
+*::-webkit-scrollbar-thumb:hover { background: #aa7d8f; }
+*::-webkit-scrollbar-thumb:active { background: #ff8097; }
+button,a,select { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .4; }
+:focus-visible { outline: 2px solid #ff8097; outline-offset: 3px; }
+textarea { resize: none; }
+.history-button { padding: .6rem; font-size: .75rem; border: 1px solid #51454b; border-radius: .3rem; }
+.history-button:hover:enabled { background: #491427; }
+.confirm-dialog { color: var(--text); background: var(--surface); border: 1px solid #75626b; border-radius: .75rem; max-width: min(32rem,90vw); padding: 1.5rem; }
+.confirm-dialog::backdrop { background: #000b; }
+.confirm-dialog h2 { font-size: 1.1rem; line-height: 1.6; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
+.dialog-actions button { padding: .7rem 1rem; border: 1px solid #75626b; border-radius: .3rem; }
+.dialog-actions button:last-child { background: var(--accent); }
+.error-banner { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem 1rem; background: #491427; color: #fff7fa; font-size: .85rem; }
+@media(max-width: 700px) { .editor-shell main { flex-direction: column; } .editor-shell aside { width: 100%; max-height: 34dvh; overflow-y: auto; } .editor-shell .group { padding: 1.5rem; } }
+@media(prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media(forced-colors: active) { * { scrollbar-color: auto; } }

@@ -1,7 +1,7 @@
 {
   "name": "g4-docs-editor",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Editor PDF local G4 DOCS EDITOR.",
   "author": "Gabriel Sorensen",
   "license": "UNLICENSED",
@@ -15,19 +15,8 @@
     "clean": "node -e \"const fs=require('fs'); ['dist','release-builds'].forEach(p=>fs.rmSync(p,{recursive:true,force:true}))\"",
     "lint": "tsc --noEmit",
     "dist:desktop": "npm run dist:win",
-    "dist:win": "npm run build && electron-builder --win nsis portable --publish never",
-    "dist:appimage": "npm run build && electron-builder --linux AppImage --publish never"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.14",
-    "@vitejs/plugin-react": "^5.0.4",
-    "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
-    "pdf-lib": "^1.17.1",
-    "pdfjs-dist": "^5.7.284",
-    "react": "^19.0.1",
-    "react-dom": "^19.0.1",
-    "vite": "^6.2.3"
+    "dist:win": "npm run build && node scripts/prepare-desktop.mjs && electron-builder --win nsis portable --publish never",
+    "dist:appimage": "npm run build && node scripts/prepare-desktop.mjs && electron-builder --linux AppImage --publish never"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
@@ -41,15 +30,24 @@
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
-    "vite": "^6.2.3"
+    "vite": "^6.2.3",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.7.284",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1"
   },
   "build": {
     "appId": "com.g4.docs.editor",
     "productName": "G4 DOCS EDITOR",
-    "copyright": "Copyright © 2026 Gabriel Sorensen. Todos os direitos reservados.",
+    "copyright": "Copyright \u00a9 2026 Gabriel Sorensen. Todos os direitos reservados.",
     "directories": {
       "buildResources": "build",
-      "output": "release-builds"
+      "output": "release-builds",
+      "app": "desktop-stage"
     },
     "files": [
       "dist/**/*",
@@ -100,6 +98,8 @@
       ],
       "category": "Office",
       "artifactName": "G4-DOCS-EDITOR-${version}-${arch}.${ext}"
-    }
-  }
+    },
+    "npmRebuild": false
+  },
+  "dependencies": {}
 }
